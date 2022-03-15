@@ -1,13 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Util.fs" />
+        <Compile Include="BaseRandom.fs" />
+        <Compile Include="Lfsr.fs" />
+        <Compile Include="XorShiftLfsr.fs" />
         <Compile Include="Library.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Fable.Core" Version="3.6.2" />
     </ItemGroup>
 
 </Project>

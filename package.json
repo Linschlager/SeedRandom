@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "workspaces": [
+    "Random.Test"
+  ],
+  "scripts": {
+    "test:fable": "yarn --cwd ./Random.Test test:fable",
+    "test:dotnet": "yarn --cwd ./Random.Test test:dotnet"
+  }
+}

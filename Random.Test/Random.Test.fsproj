@@ -2,25 +2,22 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-
+        <OutputType>Exe</OutputType>
         <IsPackable>false</IsPackable>
         <GenerateProgramFile>false</GenerateProgramFile>
+        <RootNamespace>Random.Test</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="TestUtil.fs" />
         <Compile Include="TestLibrary.fs" />
-        <Compile Include="Program.fs" />
+        <Compile Include="Runner.fs" />
+        <Content Include="package.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-        <PackageReference Include="xunit" Version="2.4.1" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="coverlet.collector" Version="3.1.0">
+        <PackageReference Include="Expecto" Version="9.0.4" />
+        <PackageReference Include="Fable.Mocha" Version="2.12.0" />
+        <PackageReference Include="Expecto.VisualStudio.TestAdapter" Version="10.0.2">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>

@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "name": "random-test",
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "mocha": "^9.2.2"
+  },
+  "scripts": {
+    "pretest:fable": "dotnet fable . -o ./dist/Random.Test.Fable --noCache",
+    "test:fable": "mocha ./dist/Random.Test.Fable -r esm",
+    "test:dotnet": "dotnet run",
+    "test": "yarn test:fable && yarn test:dotnet"
+  }
+}

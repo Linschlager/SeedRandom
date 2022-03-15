@@ -1,0 +1,31 @@
+name: On Push
+on: [push, pull_request]
+jobs:
+  Test-Workflow:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        dotnet-version: [ '6.0.x' ]
+        node-version: [ '12', '14', 15, '16', '17' ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install tool dependencies (dotnet)
+        run: dotnet tool restore
+      - name: Install dependencies (dotnet)
+        run: dotnet restore
+      - name: Install dependencies (yarn)
+        run: yarn install
+      - name: Test (dotnet)
+        run: yarn test:dotnet
+      - name: Test (Fable)
+        run: yarn test:fable
