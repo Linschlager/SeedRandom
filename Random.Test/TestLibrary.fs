@@ -48,6 +48,24 @@ let tests =
                 let num = rnd.Next()
                 Expect.isTrue (set.Add num) $"Failed at index %i{i}"
 
+        testCase "Random numbers are roughly uniformly distributed" <| fun _ ->
+            let relSpreadFromAverage (arr: int64 array) =
+                let avg = Array.averageBy float arr |> System.Math.Round |> int64
+                arr
+                |> Array.map (fun x -> abs (x - avg))
+                |> Array.map (fun x -> decimal x / decimal avg)
+                |> Array.average
+
+            let rnd = Random ()
+            let nums = Array.init 1_000_000 <| fun _ -> int64 <| rnd.Next ()
+
+            let groups =
+                Array.chunkBySize 1000 nums
+                |> Array.map Array.sum
+
+            let avgSpread = relSpreadFromAverage groups
+            Expect.isLessThan avgSpread 0.02m "Spread is less than 2% over a sample of 1000 entries"
+
         // This test will most likely need to be updated after changes to the randomizer engine
         // But is necessary to prove that the seeds are platform independent
         testCase "Seed works the same for Dotnet and Fable" <| fun _ ->
